@@ -41,6 +41,13 @@ public class Noeud {
         this.listeCmd = listeCmd;
         this.visited = false;
     }
+    public Noeud(DictionnaireChaine<String, Noeud> configPossible, Niveau state, String listeCmd) {
+        this.configPossible = configPossible;
+        this.state = state;
+        this.childs = new ListeTableau<>();
+        this.listeCmd = listeCmd;
+        this.visited = false;
+    }
 
 
     public String calculerFils(){
@@ -50,29 +57,38 @@ public class Noeud {
         //boucler pour toutes les directions
         for (int i = 0; i < commandesPossible.length; i++) {
             //Verification si c'est en cours
-            if (state.enCours()) {
-                //verification si le joueur peur se déplacer
-                if (state.deplacementPossible(commandesPossible[i])) {
-                    listeCmd = this.cmd + "" + commandesPossible[i];
-                    Niveau newState = state.copier();
-                    newState.calcule();
-                    Boolean aGagne = newState.estGagnant();
-                    affichageGagnant(aGagne);
-
-                }
+            if (state.enCours() && state.deplacementPossible(commandesPossible[i])) {
+                listeCmd = this.cmd + "" + commandesPossible[i];
+                Niveau newState = state.copier();
+                newState.calcule();
+                Boolean aGagne = newState.estGagnant();
+                affichageGagnant(aGagne,newState);
             }
         }
 
         return null;
     }
-    public String affichageGagnant(Boolean aGagne, Niveau newState) {
-        String etatNoeud;
+    private void affichageGagnant(Boolean aGagne, Niveau newState) {
+        String valNoeud;
         if (aGagne) {
             res = listeCmd;
         } else {
-            Noeud noeud;
-            etatNoeud = newState.valeurChaine();
+
+            valNoeud = newState.valeurChaine();
+            Noeud noeud = configContient(valNoeud,newState);
+            this.childs.ajouter(noeud);
         }
+    }
+    private Noeud configContient(String valNoeud, Niveau newState){
+        Noeud noeud;
+        if (configPossible.contient(valNoeud)) {
+            noeud = configPossible.valeur(valNoeud);
+        } else {
+            //si elle est pas dans le dictionnaire on l'ajoute
+            noeud = new Noeud(this.configPossible, newState, listeCmd);
+            this.configPossible.inserer(valNoeud, noeud);
+        }
+        return noeud;
     }
 
 
