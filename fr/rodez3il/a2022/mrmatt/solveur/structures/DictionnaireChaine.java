@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class DictionnaireChaine<C, V> implements Dictionnaire<C, V> {
 
+    public int taille() {
+       return this.taille ;
+    }
+
     private class Entree<C, V> {
         private C cle;
         private V val;
