@@ -41,7 +41,11 @@ public class DictionnaireChaine<C, V> implements Dictionnaire<C, V> {
     private int taille = 0;
 
 
-
+    /**
+     * Permet l'insertion d'une entrée dans le dictionaire chainé
+     * @param cle
+     * @param valeur
+     */
     @Override
     public void inserer(C cle, V valeur) {
         Entree monEntree = new Entree<>(cle, valeur);
@@ -65,6 +69,11 @@ public class DictionnaireChaine<C, V> implements Dictionnaire<C, V> {
 
     }
 
+    /**
+     * Permet de verifier si dictionaire contient la clé passé en parametre
+     * @param cle
+     * @return un Boolean pour savoir si le dico contient bien la clé
+     */
     @Override
     public boolean contient(C cle) {
         boolean result = false;
@@ -80,6 +89,11 @@ public class DictionnaireChaine<C, V> implements Dictionnaire<C, V> {
         return result;
     }
 
+    /**
+     * Donne la valeur qui correspond a la clé passé en param
+     * @param cle
+     * @return Valeur
+     */
     @Override
     public V valeur(C cle) {
         V val = null;

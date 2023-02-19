@@ -6,34 +6,47 @@ import fr.rodez3il.a2022.mrmatt.sources.Niveau;
 
 public class Solveur {
 
+	/**
+	 * permet de renvoyer les solutions (Une liste de commande
+	 * @param niveau
+	 * @return string
+	 */
 	public static String trouverSolution(Niveau niveau) {
 
 		DictionnaireChaine<String, Noeud> configConnu = new DictionnaireChaine<>();
-		Noeud noeudInitial = new Noeud(configConnu, niveau, "");
+		Noeud noeud = new Noeud(configConnu, niveau, "");
 		ListeTableau<Noeud> aTraiter = new ListeTableau<>();
 		ListeTableau<Noeud> traite = new ListeTableau<>();
-		aTraiter.ajouter(noeudInitial);
+		aTraiter.ajouter(noeud);
 		String solution = null;
 
-		//tant que la liste est pas vide et qu'on a pas trouvé la solution, on boucle
-		while (!aTraiter.estVide() && solution == null){
+		// on reste dans la boucle tant qu'on a pas la solution
+		while (solution == null){
 			Noeud n = aTraiter.enlever(0);
 			traite.ajouter(n);
 			solution = n.calculerFils();
 
 			if(solution == null) {
-				ListeTableau<Noeud> tabFils = n.getChilds();
-				parcoursTabChils(tabFils,  aTraiter,  traite );
+				ListeTableau<Noeud> listeChilds = n.getChilds();
+				parcoursListeChils(listeChilds,  aTraiter,  traite );
 			}
 
 		}
 		return solution;
 	}
-	private static void parcoursTabChils(ListeTableau<Noeud> tabFils, ListeTableau<Noeud> aTraiter, ListeTableau<Noeud> traite) {
-		for(int i = 0; i < tabFils.taille(); i++) {
-			Noeud fils = tabFils.element(i);
-			if(!aTraiter.contient(fils) && !traite.contient(fils) && !fils.getVisited())
-				aTraiter.ajouter(fils);
+
+
+	/**
+	 * permet de parcourir la listeTableau de Noeud
+	 * @param listeChilds
+	 * @param aTraiter
+	 * @param traite
+	 */
+	private static void parcoursListeChils(ListeTableau<Noeud> listeChilds, ListeTableau<Noeud> aTraiter, ListeTableau<Noeud> traite) {
+		for(int i = 0; i < listeChilds.taille(); i++) {
+			Noeud childs = listeChilds.element(i);
+			if(!aTraiter.contient(childs) && !traite.contient(childs) && !childs.getVisited())
+				aTraiter.ajouter(childs);
 		}
 	}
 

@@ -5,6 +5,8 @@ import fr.rodez3il.a2022.mrmatt.solveur.structures.ListeTableau;
 import fr.rodez3il.a2022.mrmatt.sources.Commande;
 import fr.rodez3il.a2022.mrmatt.sources.Niveau;
 
+import java.util.Objects;
+
 public class Noeud {
 
     //dictionnaire qui va stocker les différentes configurations connues
@@ -45,37 +47,6 @@ public class Noeud {
         }
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (obj instanceof Noeud)
-            return false;
-        Noeud other = (Noeud) obj;
-        if (configPossible == null) {
-            if (other.configPossible != null)
-                return false;
-        } else if (!configPossible.equals(other.configPossible))
-            return false;
-        if (niveau == null) {
-            if (other.niveau != null)
-                return false;
-        } else if (!niveau.equals(other.niveau))
-            return false;
-        if (child == null) {
-            if (other.child != null)
-                return false;
-        } else if (!child.equals(other.child))
-            return false;
-        if (cmd == null) {
-            if (other.cmd != null)
-                return false;
-        } else if (!cmd.equals(other.cmd))
-            return false;
-        return true;
-    }
 
     public String calculerFils() {
         this.visited = true;
@@ -96,6 +67,11 @@ public class Noeud {
         return solution;
     }
 
+    /**
+     * Verifier si la partie est gagné ou pas
+     * @param gagnant
+     * @param nouvelEtat
+     */
     private void estGagnant(Boolean gagnant, Niveau nouvelEtat){
         if (gagnant) {
             solution = listeCmd;
@@ -109,6 +85,11 @@ public class Noeud {
         }
     }
 
+    /**
+     * Vérifie si configPossible contient la variable valChaine
+     * @param newNiveau
+     * @return Noeud
+     */
     private Noeud configContient(Niveau newNiveau) {
         Noeud filsNoeud;
         if (configPossible.contient(valChaine)) {
@@ -124,4 +105,16 @@ public class Noeud {
         return filsNoeud;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Noeud noeud = (Noeud) o;
+        return visited == noeud.visited && Objects.equals(configPossible, noeud.configPossible) && Objects.equals(niveau, noeud.niveau) && Objects.equals(child, noeud.child) && Objects.equals(cmd, noeud.cmd) && Objects.equals(solution, noeud.solution) && Objects.equals(listeCmd, noeud.listeCmd) && Objects.equals(valChaine, noeud.valChaine);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(configPossible, niveau, child, cmd, visited, solution, listeCmd, valChaine);
+    }
 }

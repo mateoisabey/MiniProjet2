@@ -6,11 +6,18 @@ public class ListeTableau<E> implements Liste<E> {
 
     private int taille;
 
+    /**
+     * Constructeur d'une ListeTableau
+     */
     public ListeTableau() {
         this.tab = (E[]) (new Object[5]);
         this.taille = 0;
     }
 
+    /**
+     * Ajouter un element a la liste tableau
+     * @param element l'élément à ajouter
+     */
     @Override
     public void ajouter(E element) {
         if ( estPlein()) {
@@ -29,26 +36,38 @@ public class ListeTableau<E> implements Liste<E> {
     }
 
 
+    /**
+     * Verifier si la liste tableau est vide
+     * @return boolean
+     */
     @Override
     public boolean estVide() {
         return taille == 0;
     }
+
+    /**
+     * Véérifier si la liste de tableau est pleine
+     * @return boolean
+     */
     private boolean estPlein(){
         return this.taille == tab.length;
     }
 
+    /**
+     * Renvoi la taille de la listeTableau
+     * @return int
+     */
     @Override
     public int taille() {
         return this.taille;
     }
 
-    /**
-     * Enlève (et retourne) l'élément à la position
-     * i.
-     * @param i la position de l'élément.
-     * @return L'élément qui a été supprimé.
-     */
 
+    /**
+     * Enlever un element d'une listeTableau
+     * @param i la position de l'élément.
+     * @return element
+     */
     @Override
     public E enlever(int i) {
         E res = (E) tab[i];
@@ -58,12 +77,23 @@ public class ListeTableau<E> implements Liste<E> {
         this.taille--;
         return (E) res;
     }
+
+    /**
+     * renvoie l'element qui se situe a la position mis en param
+     * @param i
+     * @return element
+     */
     @Override
     public E element(int i){
         return this.tab[i];
     }
 
 
+    /**
+     * Verifier si la liste de tableau contien l'element passé en param
+     * @param e L'élément à comparer.
+     * @return boolean
+     */
     @Override
     public boolean contient(E e) {
         Boolean state = false;
