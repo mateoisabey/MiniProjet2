@@ -71,11 +71,6 @@ class ListeChaineeTest {
         liste1.ajouter(2);
         liste1.ajouter(3);
 
-        ListeChainee<Integer> liste2 = new ListeChainee<>();
-        liste2.ajouter(1);
-        liste2.ajouter(2);
-        liste2.ajouter(3);
-
         ListeChainee<Integer> liste3 = new ListeChainee<>();
         liste3.ajouter(3);
         liste3.ajouter(2);
