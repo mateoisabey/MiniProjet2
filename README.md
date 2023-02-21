@@ -1,12 +1,3 @@
-
-### Structure du rendu
-
-5. Enfin, vous réaliserez un fichier `README.md` à la racine du projet dans lequel vous indiquerez, sous réserve de pertinence :
-    - ce que vous avez réalisé du projet ;
-    - les réponses aux diverses questions du sujet s'il y en a ;
-    - un retour personnel sur les points qui vous ont paru difficiles ;
-    - tout autre commentaire que vous jugerez utile...
-
 Le projet a été réalisé dans son integralité.
 
 
