@@ -1,6 +1,5 @@
 Le projet a été réalisé dans son integralité.
 
-
 *Question : quel est le type du tableau à utiliser ?*
 
 réponse : Ca sera un tableau d'object
@@ -11,6 +10,8 @@ réponse : Ca sera un tableau d'object
 Réponse : Dans une `ListeChainee` les elements sont lié les un aux autres.
 
 *Question : dans votre code, le type statique de vos références de liste et dictionnaires est-il celui de vos implémentations concrètes ? Pourquoi ?*
+
+Réponse : C'est le même type statique, car s'ils étaient different ça pourrait causer des problem de compilation ou d'execution
 
 
 ### Point de blockage :

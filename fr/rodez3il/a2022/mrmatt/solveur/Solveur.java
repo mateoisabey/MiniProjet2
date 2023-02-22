@@ -45,7 +45,7 @@ public class Solveur {
 	private static void parcoursListeChils(ListeTableau<Noeud> listeChilds, ListeTableau<Noeud> aTraiter, ListeTableau<Noeud> traite) {
 		for(int i = 0; i < listeChilds.taille(); i++) {
 			Noeud childs = listeChilds.element(i);
-			if(!aTraiter.contient(childs) && !traite.contient(childs) && !childs.getVisited())
+			if(!aTraiter.contient(childs))
 				aTraiter.ajouter(childs);
 		}
 	}
